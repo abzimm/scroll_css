@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Scroll Based Animation</title>
+  </head>
+  <body>
+    <section class="step medium-container">
+      <h1>Welcome to scroll-based animation!</h1>
+      <p>
+        Explore the different sections of this page and view their animations.
+        Then, go into the CSS file and customize the animation classes to your
+        liking.
+      </p>
+      <p>Scroll up and down the page to see what happens.</p>
+    </section>
+
+    <section class="step medium-container">
+      <h2>Basic Text Fade In...</h2>
+      <p>
+        This code uses the Intersection Observer API. All it does is check to
+        see if an element is visible onscreen - if it is, the animation
+        triggers!
+      </p>
+    </section>
+
+    <section class="step small-container">
+      <p class="move-in-left">It can move in from the left</p>
+      <p class="move-in-right">Or it can move in from the right</p>
+    </section>
+
+    <section class="step small-container">
+      <p class="fade">Scrolling becomes more fun with images.</p>
+      <img class="fade" src="aea65c52ab46f32d767bae0975417d07.jpg" />
+    </section>
+
+    <section class="step medium-container">
+      <p class="move-in-left">
+        Go into the CSS file and mess around with directions, speeds, and other
+        transform settings.
+      </p>
+      <img class="up" src="aea65c52ab46f32d767bae0975417d07.jpg" />
+    </section>
+
+    <section class="step medium-container">
+      <div class="stagger-container">
+        <h1>
+          <div class="stagger-item">It can start to get</div>
+          <div class="stagger-item">really complicated</div>
+          <div class="stagger-item">really quickly</div>
+          <div class="stagger-item">so see what you can do!</div>
+        </h1>
+      </div>
+    </section>
+
+    <!-- COPY + PASTE + ADD MORE SECTIONS HERE. Use element tags like <p> and <img>, and add new ones as well! Or, remove everything and start from scratch.  -->
+
+    <script>
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3, //Animation starts when 30% of the element is visible.
+      };
+
+      //Animates elements on scroll.
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      }, options);
+
+      // "Observes" the class of the element to see which animation to apply.
+      function observeElements(elements) {
+        elements.forEach((element) => {
+          observer.observe(element);
+        });
+      }
+
+      // Observe sections: smooth transition for each section
+      const sections = document.querySelectorAll(".step");
+      observeElements(sections);
+
+      // Observe move-in-left elements
+      const moveLeft = document.querySelectorAll(".move-in-left");
+      observeElements(moveLeft);
+
+      // Observe move-in-right elements
+      const moveRight = document.querySelectorAll(".move-in-right");
+      observeElements(moveRight);
+
+      // Observe fade elements
+      const fade = document.querySelectorAll(".fade");
+      observeElements(fade);
+
+      // Observe up elements
+      const up = document.querySelectorAll(".up");
+      observeElements(up);
+
+      //Observe staggered elements: more advanced!
+      const staggerItems = document.querySelectorAll(".stagger-item");
+      observeElements(staggerItems);
+
+      //ADD MORE HERE. Simply copy and paste, changing out the class name for the ones you've added in the css file.
+    </script>
+  </body>
+</html>
